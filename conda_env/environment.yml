@@ -6,10 +6,27 @@ dependencies:
   - biobb_analysis==4.2.0
   - biobb_io==4.2.0
   - biobb_model==4.2.0
-  - biobb_gromacs==4.2.0
+  # Old config interrupted by the GROMACS issue
+  #- biobb_gromacs==4.2.0 #Commented since it will be installed manually
+  # See: https://github.com/bioexcel/biobb_gromacs/issues/23
+  - cmake
+  - libhwloc
+  - ocl-icd
+  - biopython
+  - fftw
+  - numpy
+  - cython
+  - h5py
+  - pandas
+  - openbabel
+  # Resume old config
   - biobb_chemistry==4.2.0
   - biobb_structure_utils==4.2.0
   - jupyter
   - plotly
   - nglview
   - simpletraj
+  - pip:
+    # Install python bindings only. Will compile GROMACS manually
+    - biobb_common==4.2.0
+    - biobb-gromacs==4.2.0
