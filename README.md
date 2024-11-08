@@ -37,7 +37,7 @@ This tutorial aims to illustrate the process of **setting up a simulation system
 ### Conda Installation and Launch
 
 ```console
-git clone https://github.com/bioexcel/biobb_wf_protein-complex_md_setup.git
+git clone https://github.com/hariseldon99/biobb_wf_protein-complex_md_setup.git
 cd biobb_wf_protein-complex_md_setup
 conda env create -f conda_env/environment.yml
 conda activate biobb_wf_protein-complex_md_setup
@@ -49,10 +49,6 @@ jupyter-notebook biobb_wf_protein-complex_md_setup/notebooks/biobb_wf_protein-co
 ## Tutorial
 
 Click here to [view tutorial in Read the Docs](https://biobb-wf-protein-complex-md-setup.readthedocs.io/en/latest/index.html)
-
-Click here to [execute tutorial in Binder](https://mybinder.org/v2/gh/bioexcel/biobb_wf_protein-complex_md_setup/HEAD?labpath=biobb_wf_protein-complex_md_setup%2Fnotebooks%2Fbiobb_wf_protein-complex_md_setup.ipynb)
-
-Click here to [open tutorial in Google Colab](https://colab.research.google.com/github/bioexcel/biobb_wf_protein-complex_md_setup/blob/main/biobb_wf_protein-complex_md_setup/notebooks/biobb_wf_protein-complex_md_setup.ipynb)
 
 
 ***
