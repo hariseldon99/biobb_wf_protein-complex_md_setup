@@ -46,16 +46,14 @@ cd biobb_wf_protein-complex_md_setup
 conda env create -f conda_env/environment.yml
 conda activate biobb_wf_protein-complex_md_setup
 ```
-
-2. Compile `GROMACS` from source with `CUDA`: `TODO`
+2. Install or load `CUDA`, *i.e.*, `CUDATOOLKIT`
+2. Download and compile `GROMACS` from source with `CUDA` enabled: `TODO`
 3. Install development version of `MDAnalysis`: `TODO`
 4. Run
 
 ```console
 jupyter-notebook biobb_wf_protein-complex_md_setup/notebooks/biobb_wf_protein-complex_md_setup.ipynb
 ```
-
-
 
 ## Tutorial
 
@@ -79,3 +77,37 @@ Licensed under the
 ![](https://bioexcel.eu/wp-content/uploads/2019/04/Bioexcell_logo_1080px_transp.png "Bioexcel")
 
 Forked by [Analabha Roy](https://sites.google.com/phys.buruniv.ac.in/home-page-of-analabha-roy/), [Department of Physics](https://sites.google.com/a/phys.buruniv.ac.in/physics/), [The University of Burdwan](https://www.buruniv.ac.in)
+
+## TODO
+
+Conda environment created properly, but downloading gromacs source and running the following in the build directory:
+
+```console
+cmake .. -DCMAKE_INSTALL_PREFIX=$CONDA_PREFIX -DGMX_GPU=CUDA -DGMX_HWLOC=ON -DGMX_SIMD=AVX_512
+make -j $NPROCS
+make check
+make install
+```
+
+yields error for cmake:
+
+```console
+CMake Error: The following variables are used in this project, but they are set to NOTFOUND.
+Please set them or make sure they are set and tested correctly in the CMake files:
+CUDA_cufft_LIBRARY (ADVANCED)
+    linked by target "testutils" in directory /tmp/gromacs-2024.4/src/testutils
+    linked by target "libgromacs" in directory /tmp/gromacs-2024.4/src/gromacs
+
+-- Generating done (0.8s)
+CMake Generate step failed.  Build files cannot be regenerated correctly.
+```
+
+Solution: [NVidia HPC toolkit is not supported](https://gromacs.bioexcel.eu/t/compiling-gromacs-2023-2-on-ms-azure-cluster/6845/1) for `GROMACS`. Need standard cuda toolkit. Run in cluster where this should work.
+
+Also, need to figure out what environment variables to set for gromacs to work properly. The `gromacs` package in conda-forge sets the following files 
+- @ [$CONDA_PREFIX/etc/conda/activate.d](conda_env/etc/conda/activate.d)
+- @ [$CONDA_PREFIX/etc/conda/deactivate.d](conda_env/etc/conda/activate.d)
+
+The files should probably should be changed to include the AVX_512 option
+
+Background: https://guillaume-martin.github.io/saving-environment-variables-in-conda.html
